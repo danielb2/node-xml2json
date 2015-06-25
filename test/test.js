@@ -19,6 +19,19 @@ var internals = {};
 
 describe('xml2json', function () {
 
+    it('forces some xml structure into arrays', function (done) {
+
+        var xml = internals.readFixture('forceArray.xml');
+        var result = parser.toJson(xml, { forceArray: ['name']  });
+        var p = require('purdy');
+        p(result);
+        var json = internals.readFixture('forceArray.json');
+
+        expect(result+'\n').to.deep.equal(json);
+
+        done();
+    });
+
     it('converts with array-notation', function (done) {
 
         var xml = internals.readFixture('array-notation.xml');
